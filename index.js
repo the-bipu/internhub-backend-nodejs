@@ -1,6 +1,5 @@
 import express from "express";
 import cors from 'cors';
-import { PORT, URI } from "./config.js";
 import mongoose from 'mongoose';
 import internshipRoute from './routes/internshipRoute.js';
 import userRoute from './routes/userRoute.js';
@@ -19,10 +18,10 @@ app.use('/internship', internshipRoute);
 app.use('/users', userRoute);
 
 mongoose
-    .connect(URI)
+    .connect(process.env.URI)
     .then(() => {
         console.log('App connected to database.');
-        app.listen(PORT, () => {
+        app.listen(process.env.PORT || 5555, () => {
             console.log(`App is listening to Port: ${PORT}`);
         });
     })
